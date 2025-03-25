@@ -1,1 +1,3 @@
-(function() { emailjs.init('YOUR_EMAILJS_PUBLIC_KEY'); })();
+(function() {
+  emailjs.init("ZgXmlUv7-hSz3exxl");
+})();

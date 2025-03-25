@@ -26,11 +26,11 @@ document.addEventListener('DOMContentLoaded', function () {
       notes: notes
     };
 
-    emailjs.send('your_service_id', 'your_template_id', templateParams)
+    emailjs.send('service_j4beam4', 'template_rp83yqo', templateParams)
       .then(function(response) {
-        alert("Booking request sent successfully! We'll get in touch shortly.");
+        alert("Your message has been sent successfully!");
       }, function(error) {
-        alert("Failed to send booking. Please try again.");
+        alert("Failed to send message. Please try again.");
         console.error(error);
       });
   });
