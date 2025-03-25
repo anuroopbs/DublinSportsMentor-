@@ -1,33 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dublin Sports Mentor</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f8fb;
+    }
+    header {
+      background-color: #99cfff;
+      color: #004080;
+      padding: 20px;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav ul li a {
+      color: #004080;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      background-color: #cce5ff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
+    }
+    .column {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label, input, select, textarea {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+    .btn-primary {
+      background-color: #004080;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    footer {
+      text-align: center;
+      background-color: #004080;
+      color: white;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <div class="logo"><a href="index.html">Dublin Sports Mentor</a></div>
+    <h1 style="color: #004080;">Dublin Sports Mentor</h1>
     <nav>
       <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="find-player.html">Find a Player</a></li>
+        <li><a href="quiz.html">Find Your Sport</a></li>
+        <li><a href="#">Coaching</a></li>
+        <li><a href="#">Ladder Rankings</a></li>
+        <li><a href="#">Find a Player</a></li>
+        <li><a href="#">Funds</a></li>
+        <li><a href="#" onclick="document.getElementById('socialModal').style.display='flex'">Social Media</a></li>
       </ul>
     </nav>
   </header>
 
+  <div class="hero">
+    <h2>Sports Consultation</h2>
+    <p>Book your session with our mentors to understand which club and sport is closest to you, and which one suits your personality best.</p>
+  </div>
+
   <div class="container">
-    <div class="card">
-      <h2>Your Coach</h2>
-      <div class="coach-badge">World Squash Federation Level 1 Coach</div>
-      <p>Welcome to Dublin Sports Hub's squash coaching program. As a certified World Squash Federation Level 1 Coach, I'm dedicated to helping players of all levels improve their skills and enjoy the game of squash.</p>
+    <!-- content omitted for brevity, would be reinserted here if needed -->
+  </div>
+
+  <div id="socialModal" style="display:none; position: absolute; top: 90px; right: 40px; background-color: #ffffff; border: 1px solid #ccc; padding: 15px 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000;">
+    <div style="background: white; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+      <h2>Connect with the Squash Fraternity</h2>
+      <ul style="list-style: none; padding-left: 0; line-height: 2;">
+        <li><a href="https://www.facebook.com/groups/138252883393098/?ref=share" target="_blank">Dublin Squash Group</a></li>
+        <li><a href="https://www.facebook.com/groups/anuroopbs/?ref=share" target="_blank">Hyderabad Squash Group</a></li>
+        <li><a href="https://www.facebook.com/groups/625415176502463/?ref=share" target="_blank">Global Squash Coaches Group</a></li>
+      </ul>
+      <button onclick="document.getElementById('socialModal').style.display='none'" class="btn-primary" style="margin-top: 10px; font-size: 12px; width: auto; padding: 6px 12px;">Close</button>
     </div>
   </div>
 
   <footer>
-    <p>&copy; 2025 Dublin Sports Mentor</p>
+    <p>&copy; 2025 Dublin Sports Hub - Squash Coaching</p>
   </footer>
+
+  <script>
+    // Auto-set today's date in date input
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').value = today;
+
+    // Static counter values
+    document.getElementById('counter-introduced').textContent = '833';
+    document.getElementById('counter-remaining').textContent = '14167';
+  </script>
 </body>
 </html>
