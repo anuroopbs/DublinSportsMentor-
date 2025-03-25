@@ -1,0 +1,363 @@
+/* Quiz Modal Styles */
+.quiz-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.quiz-modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 700px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.quiz-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #1e90ff;
+}
+
+.quiz-close:hover {
+    color: #187bcd;
+}
+
+/* Quiz Styles */
+.quiz-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.quiz-screen {
+    display: none;
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.quiz-screen.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quiz-content {
+    padding: 20px;
+}
+
+/* Welcome Screen */
+#quiz-welcome-screen {
+    text-align: center;
+}
+
+#quiz-welcome-screen h1 {
+    color: #1e90ff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#quiz-welcome-screen p {
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Question Screen */
+.quiz-progress-container {
+    background-color: #1e90ff;
+    padding: 15px;
+    color: white;
+}
+
+.quiz-progress-bar {
+    background-color: rgba(255, 255, 255, 0.3);
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.quiz-progress {
+    background-color: white;
+    height: 100%;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+#quiz-progress-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+#quiz-question-text {
+    color: #1e90ff;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.quiz-answers-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quiz-answer-btn {
+    background-color: #f0f8ff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.quiz-answer-btn:hover {
+    background-color: #e6f2ff;
+    transform: translateY(-2px);
+}
+
+.quiz-answer-btn.selected {
+    background-color: #1e90ff;
+    color: white;
+    border-color: #1e90ff;
+}
+
+/* Result Screen */
+.quiz-result-card {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.quiz-personality-badge {
+    background-color: #1e90ff;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: -20px -20px 20px -20px;
+}
+
+#quiz-personality-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.quiz-sport-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 15px;
+    background-color: #1e90ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#quiz-recommended-sport {
+    color: #1e90ff;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+#quiz-sport-description {
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.quiz-sport-details {
+    margin-bottom: 20px;
+}
+
+.quiz-sport-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    background-color: #f0f8ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.quiz-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.quiz-stat-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.quiz-stat-value {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.quiz-stat-bar {
+    height: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.quiz-stat-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.quiz-ease-fill {
+    background-color: #1e90ff;
+}
+
+.quiz-social-fill {
+    background-color: #1e90ff;
+}
+
+.quiz-fun-fill {
+    background-color: #ff9800;
+}
+
+.quiz-intensity-fill {
+    background-color: #f44336;
+}
+
+.quiz-badge-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+    perspective: 1000px;
+}
+
+.quiz-badge {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+}
+
+.quiz-badge-front, .quiz-badge-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-badge-front {
+    background: linear-gradient(135deg, #1e90ff, #187bcd);
+    color: white;
+}
+
+.quiz-badge-back {
+    background: linear-gradient(135deg, #187bcd, #1e90ff);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+.quiz-badge:hover {
+    transform: rotateY(180deg);
+}
+
+.quiz-badge-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.quiz-badge-sport {
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.quiz-badge-personality {
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .quiz-modal-content {
+        margin: 10% auto;
+        padding: 20px;
+        width: 90%;
+    }
+    
+    #quiz-personality-title {
+        font-size: 1.1rem;
+    }
+    
+    #quiz-recommended-sport {
+        font-size: 1.5rem;
+    }
+    
+    .quiz-badge-container {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Animation for confetti */
+.quiz-confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #1e90ff;
+    opacity: 0;
+}
+
+@keyframes quiz-confetti-fall {
+    0% {
+        opacity: 1;
+        top: -10px;
+        transform: translateX(0) rotateZ(0deg);
+    }
+    100% {
+        opacity: 0;
+        top: 100%;
+        transform: translateX(20px) rotateZ(360deg);
+    }
+}

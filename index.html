@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e90ff">
+    <title>Dublin Sports Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="quiz-modal.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function()  {
+          emailjs.init("ZgXmlUv7-hSz3exxl"); // Your correct Public Key
+       })();
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">Dublin Sports Hub</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Coaching</a></li>
+                <li><a href="ladder.html">Ladder Rankings</a></li>
+                <li><a href="find-player.html">Find a Player</a></li> 
+  <li><a href="https://buy.stripe.com/14k3cZ7Yz3jCcdGbIJ" target="_blank">Pay</a></li 
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Squash Coaching</h1>
+        <p>Book your session with a professional coach today</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <h2>Your Coach</h2>
+                    <div class="coach-badge">
+                        World Squash Federation Level 1 Coach
+                    </div>
+                    <p>Welcome to Dublin Sports Hub's squash coaching program. As a certified World Squash Federation Level 1 Coach, I'm dedicated to helping players of all levels improve their skills and enjoy the game of squash.</p>
+                    <p>Whether you're a complete beginner looking to learn the basics or an experienced player wanting to refine your technique, my personalized coaching sessions will help you reach your goals.</p>
+                    <p>All sessions are 60 minutes in duration, providing ample time for instruction, practice, and feedback.</p>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <h2>Book a Session</h2>
+                    <p>Select a date and time for your 60-minute coaching session:</p>
+                    
+                    <div class="form-group">
+                        <label for="date">Select Date:</label>
+                        <input type="date" id="date" placeholder="Choose a date">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="time">Select Time:</label>
+                        <div class="time-slots">
+                            <button class="time-slot" data-time="9:00 AM">9:00 AM</button>
+                            <button class="time-slot" data-time="10:00 AM">10:00 AM</button>
+                            <button class="time-slot" data-time="11:00 AM">11:00 AM</button>
+                            <button class="time-slot" data-time="1:00 PM">1:00 PM</button>
+                            <button class="time-slot" data-time="2:00 PM">2:00 PM</button>
+                            <button class="time-slot" data-time="3:00 PM">3:00 PM</button>
+                            <button class="time-slot" data-time="4:00 PM">4:00 PM</button>
+                            <button class="time-slot" data-time="5:00 PM">5:00 PM</button>
+                            <button class="time-slot" data-time="6:00 PM">6:00 PM</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Your Details</h2>
+                    <form id="booking-form">
+                        <div class="form-group">
+                            <label for="name">Full Name:</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="experience">Squash Experience:</label>
+                            <select id="experience" required>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Special Requests or Notes:</label>
+                            <textarea id="notes"></textarea>
+                        </div>
+                        
+                        <div class="booking-status" id="booking-status">
+                            Your Booking: Please select a date and time
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" id="submit-btn">Request Booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-nav">
+        <a href="index.html" class="active">Coaching</a>
+        <a href="ladder.html">Rankings</a>
+        <a href="find-player.html">Find a Player</a>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Dublin Sports Hub - Squash Coaching</p>
+    </footer>
+
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Booking Confirmation</h2>
+            <p>Thank you for your booking request! We'll contact you shortly to confirm your squash coaching session.</p>
+            <div id="booking-details"></div>
+            <button class="btn-primary" id="close-modal">Close</button>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js" type="module"></script>
+    <script src="db.js"></script>
+    <script src="script.js"></script>
+    <script src="pwa.js"></script>
+    <script src="booking.js"></script>
+    <script src="quiz-modal.js"></script>
+</body>
+</html>

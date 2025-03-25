@@ -1,0 +1,162 @@
+/* Ladder Specific Styles */
+
+/* Navigation */
+nav {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab-btn {
+    background-color: #f0f8ff;
+    border: none;
+    padding: 12px 20px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.tab-btn:hover {
+    background-color: #e6f2ff;
+}
+
+.tab-btn.active {
+    background-color: #1e90ff;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Ladder Table */
+.ladder-table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.ladder-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.ladder-table th, 
+.ladder-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.ladder-table th {
+    background-color: #f0f8ff;
+    font-weight: bold;
+}
+
+.ladder-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+.ladder-table tr.dragging {
+    opacity: 0.5;
+    background-color: #e6f2ff;
+}
+
+/* Ladder Controls */
+.ladder-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-secondary {
+    background-color: #f0f8ff;
+    color: #1e90ff;
+    border: 1px solid #1e90ff;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #e6f2ff;
+}
+
+/* Rules List */
+ol {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+ol li {
+    margin-bottom: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    nav {
+        float: none;
+        display: block;
+        text-align: center;
+        margin: 10px 0 0 0;
+    }
+    
+    nav ul {
+        justify-content: center;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        width: 100%;
+        margin-bottom: 5px;
+        border-radius: 4px;
+    }
+    
+    .ladder-controls {
+        flex-direction: column;
+    }
+}

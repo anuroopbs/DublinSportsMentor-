@@ -1,0 +1,150 @@
+/* Mobile Optimization Styles */
+@media (max-width: 768px) {
+  /* General adjustments */
+  body {
+    font-size: 16px;
+  }
+  
+  .container {
+    padding: 10px;
+  }
+  
+  .row {
+    flex-direction: column;
+  }
+  
+  .column {
+    width: 100%;
+    padding: 5px;
+  }
+  
+  /* Header adjustments */
+  header {
+    padding: 10px 0;
+  }
+  
+  .logo a {
+    font-size: 20px;
+  }
+  
+  nav ul {
+    margin-top: 10px;
+    justify-content: center;
+  }
+  
+  /* Form elements */
+  input, select, textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+  }
+  
+  label {
+    margin-bottom: 8px;
+  }
+  
+  /* Time slots */
+  .time-slots {
+    justify-content: space-between;
+  }
+  
+  .time-slot {
+    flex: 0 0 calc(33.333% - 10px);
+    margin-bottom: 10px;
+    padding: 12px 5px;
+    font-size: 14px;
+  }
+  
+  /* Buttons */
+  .btn-primary, .btn-secondary {
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  
+  /* Ladder table */
+  .ladder-table th, 
+  .ladder-table td {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+  
+  /* Modal adjustments */
+  .modal-content {
+    width: 90%;
+    margin: 20% auto;
+    padding: 20px;
+  }
+  
+  /* Add to home screen prompt */
+  .pwa-install-prompt {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1e90ff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    z-index: 1000;
+    display: none;
+  }
+  
+  .pwa-install-prompt button {
+    background-color: white;
+    color: #1e90ff;
+    border: none;
+    padding: 8px 15px;
+    margin-left: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Touch-friendly adjustments */
+  button, a, .time-slot, .btn-primary, .btn-secondary {
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+  }
+  
+  /* Fixed navigation */
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1e90ff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 100;
+  }
+  
+  .mobile-nav a {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    flex: 1;
+    padding: 10px 0;
+  }
+  
+  .mobile-nav a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Add padding to bottom to account for fixed nav */
+  body {
+    padding-bottom: 60px;
+  }
+  
+  /* Pull-to-refresh indicator */
+  .ptr-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #1e90ff;
+    text-align: center;
+    height: 50px;
+  }
+}

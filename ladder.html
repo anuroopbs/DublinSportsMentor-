@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1e90ff">
+    <title>Squash Ladder Rankings</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="ladder-styles.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html">Dublin Sports Hub</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Coaching</a></li>
+                <li><a href="ladder.html" class="active">Ladder Rankings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>Squash Ladder Rankings</h1>
+        <p>Challenge other players and climb the rankings</p>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="mens">Men's Ladder</button>
+            <button class="tab-btn" data-tab="womens">Women's Ladder</button>
+        </div>
+
+        <div class="tab-content active" id="mens-tab">
+            <div class="card">
+                <h2>Men's Ladder Rankings</h2>
+                <div class="ladder-controls">
+                    <button id="add-player-mens" class="btn-secondary">Add Player</button>
+                    <button id="record-challenge-mens" class="btn-secondary">Record Challenge</button>
+                </div>
+                <div class="ladder-table-container">
+                    <table class="ladder-table" id="mens-ladder">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Matches Won</th>
+                                <th>Matches Lost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Men's ladder rankings will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="womens-tab">
+            <div class="card">
+                <h2>Women's Ladder Rankings</h2>
+                <div class="ladder-controls">
+                    <button id="add-player-womens" class="btn-secondary">Add Player</button>
+                    <button id="record-challenge-womens" class="btn-secondary">Record Challenge</button>
+                </div>
+                <div class="ladder-table-container">
+                    <table class="ladder-table" id="womens-ladder">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Player</th>
+                                <th>Matches Won</th>
+                                <th>Matches Lost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Women's ladder rankings will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Ladder Rules</h2>
+            <ol>
+                <li>Players can challenge others ranked up to 2 positions above them.</li>
+                <li>If the challenger wins, they swap positions with the player they challenged.</li>
+                <li>Players must accept challenges within 7 days.</li>
+                <li>Matches should be best of 5 games.</li>
+                <li>Results must be recorded promptly after the match.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="mobile-nav">
+        <a href="index.html">Coaching</a>
+        <a href="ladder.html" class="active">Rankings</a>
+    </div>
+
+    <!-- Add Player Modal -->
+    <div id="add-player-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add New Player</h2>
+            <form id="add-player-form">
+                <div class="form-group">
+                    <label for="player-name">Player Name:</label>
+                    <input type="text" id="player-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="player-gender">Gender:</label>
+                    <select id="player-gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Add Player</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Record Challenge Modal -->
+    <div id="challenge-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Record Challenge Result</h2>
+            <form id="challenge-form">
+                <input type="hidden" id="challenge-gender">
+                <div class="form-group">
+                    <label for="challenger">Challenger:</label>
+                    <select id="challenger" required>
+                        <option value="">Select player</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="opponent">Opponent:</label>
+                    <select id="opponent" required>
+                        <option value="">Select player</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="winner">Winner:</label>
+                    <select id="winner" required>
+                        <option value="">Select winner</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary">Record Result</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Dublin Sports Hub - Squash Ladder</p>
+    </footer>
+
+    <script src="db.js"></script>
+    <script src="ladder.js"></script>
+    <script src="pwa.js"></script>
+</body>
+</html>
