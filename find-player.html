@@ -1,12 +1,46 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Find a Player</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <h1>Find a Player</h1>
-  <p>This is where you can find a player to play squash with!</p>
+  <header>
+    <div class="logo"><a href="index.html">Dublin Sports Mentor</a></div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="find-player.html" class="active">Find a Player</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Find a Player</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" />
+        </div>
+        <div class="form-group">
+          <label for="level">Level:</label>
+          <input type="text" id="level" />
+        </div>
+        <div class="form-group">
+          <label for="time">Preferred Time:</label>
+          <input type="text" id="time" />
+        </div>
+        <button type="submit" class="btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Dublin Sports Mentor</p>
+  </footer>
 </body>
 </html>

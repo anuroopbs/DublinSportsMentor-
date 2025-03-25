@@ -2,149 +2,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1e90ff">
-  <title>Dublin Sports Hub</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="mobile.css">
-  <link rel="stylesheet" href="quiz-modal.css">
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <script>
-    (function() {
-      emailjs.init("ZgXmlUv7-hSz3exxl");
-    })();
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dublin Sports Mentor</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <div class="logo">
-      <a href="index.html">Dublin Sports Hub</a>
-    </div>
+    <div class="logo"><a href="index.html">Dublin Sports Mentor</a></div>
     <nav>
       <ul>
-        <li><a href="index.html" class="active">Coaching</a></li>
-        <li><a href="ladder.html">Ladder Rankings</a></li>
-        <li><a href="#find-player-section">Find a Player</a></li>
-        <li><a href="https://buy.stripe.com/14k3cZ7Yz3jCcdGbIJ" target="_blank">Pay</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="find-player.html">Find a Player</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="hero">
-    <h1>Squash Coaching</h1>
-    <p>Book your session with a professional coach today</p>
-  </div>
-
   <div class="container">
-    <div class="row">
-      <div class="column">
-        <div class="card">
-          <h2>Your Coach</h2>
-          <div class="coach-badge">
-            World Squash Federation Level 1 Coach
-          </div>
-          <p>Welcome to Dublin Sports Hub's squash coaching program...</p>
-        </div>
-      </div>
-      <div class="column">
-        <div class="card">
-          <h2>Book a Session</h2>
-          <p>Select a date and time for your 60-minute coaching session:</p>
-          <div class="form-group">
-            <label for="date">Select Date:</label>
-            <input type="date" id="date">
-          </div>
-          <div class="form-group">
-            <label for="time">Select Time:</label>
-            <div class="time-slots">
-              <button class="time-slot" data-time="9:00 AM">9:00 AM</button>
-              <button class="time-slot" data-time="10:00 AM">10:00 AM</button>
-              <!-- Other time slots -->
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <h2>Your Details</h2>
-          <form id="booking-form">
-            <div class="form-group">
-              <label for="name">Full Name:</label>
-              <input type="text" id="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input type="email" id="email" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone Number:</label>
-              <input type="tel" id="phone" required>
-            </div>
-            <div class="form-group">
-              <label for="experience">Squash Experience:</label>
-              <select id="experience" required>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="notes">Special Requests or Notes:</label>
-              <textarea id="notes"></textarea>
-            </div>
-            <div class="booking-status" id="booking-status">Your Booking: Please select a date and time</div>
-            <button type="submit" class="btn-primary" id="submit-btn">Request Booking</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- 🔥 Find a Player Section -->
-    <div class="card" id="find-player-section">
-      <h2>Find a Player</h2>
-      <p>Looking for a partner to play squash with?</p>
-      <form id="find-player-form">
-        <div class="form-group">
-          <label for="player-name">Your Name:</label>
-          <input type="text" id="player-name" required>
-        </div>
-        <div class="form-group">
-          <label for="player-level">Playing Level:</label>
-          <select id="player-level" required>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="preferred-time">Preferred Time to Play:</label>
-          <input type="text" id="preferred-time" placeholder="e.g., Weekday evenings">
-        </div>
-        <div class="form-group">
-          <label for="player-contact">Contact Email:</label>
-          <input type="email" id="player-contact" required>
-        </div>
-        <button type="submit" class="btn-primary">Submit Request</button>
-      </form>
+    <div class="card">
+      <h2>Your Coach</h2>
+      <div class="coach-badge">World Squash Federation Level 1 Coach</div>
+      <p>Welcome to Dublin Sports Hub's squash coaching program. As a certified World Squash Federation Level 1 Coach, I'm dedicated to helping players of all levels improve their skills and enjoy the game of squash.</p>
     </div>
   </div>
 
   <footer>
-    <p>&copy; 2025 Dublin Sports Hub - Squash Coaching</p>
+    <p>&copy; 2025 Dublin Sports Mentor</p>
   </footer>
-
-  <script>
-    document.getElementById("find-player-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const name = document.getElementById("player-name").value;
-      const level = document.getElementById("player-level").value;
-      const time = document.getElementById("preferred-time").value;
-      const contact = document.getElementById("player-contact").value;
-      console.log("Player Request:", { name, level, time, contact });
-      alert("Thanks! We'll try to match you with other players soon.");
-      this.reset();
-    });
-  </script>
 </body>
 </html>
