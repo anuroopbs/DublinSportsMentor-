@@ -151,18 +151,34 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const handleGoogleLogin = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((result) => {
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    });
+    
+    firebase.auth().signInWithRedirect(provider)
+      .then(() => {
+        // Handle is not needed here as redirect will happen automatically
+      })
+      .catch((error) => {
+        console.error('Google login error:', error);
+        alert('Login failed. Please try again.');
+      });
+  };
+  
+  // Handle redirect result
+  firebase.auth()
+    .getRedirectResult()
+    .then((result) => {
+      if (result.user) {
         showAuthSuccess('Google Login Successful', 'You have been logged in successfully. Redirecting...');
-        
         setTimeout(() => {
           window.location.href = 'index.html';
         }, 2000);
-      })
-      .catch((error) => {
-        alert(`Google login failed: ${error.message}`);
-      });
-  };
+      }
+    })
+    .catch((error) => {
+      console.error('Redirect result error:', error);
+    });
   
   if (googleLoginBtn) {
     googleLoginBtn.addEventListener('click', handleGoogleLogin);
@@ -170,33 +186,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (googleRegisterBtn) {
     googleRegisterBtn.addEventListener('click', handleGoogleLogin);
-  }
-  
-  // Facebook Login
-  const facebookLoginBtn = document.getElementById('facebook-login-btn');
-  const facebookRegisterBtn = document.getElementById('facebook-register-btn');
-  
-  const handleFacebookLogin = () => {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-      .then((result) => {
-        showAuthSuccess('Facebook Login Successful', 'You have been logged in successfully. Redirecting...');
-        
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 2000);
-      })
-      .catch((error) => {
-        alert(`Facebook login failed: ${error.message}`);
-      });
-  };
-  
-  if (facebookLoginBtn) {
-    facebookLoginBtn.addEventListener('click', handleFacebookLogin);
-  }
-  
-  if (facebookRegisterBtn) {
-    facebookRegisterBtn.addEventListener('click', handleFacebookLogin);
   }
   
   // Helper function to show success modal
