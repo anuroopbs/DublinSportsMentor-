@@ -4,7 +4,7 @@
   "description": "Dublin Sports Mentor visualization sandbox for live editing",
   "main": "index.html",
   "scripts": {
-    "start": "browser-sync start --server --files \"*.html, *.css, *.js, **/*.html, **/*.css, **/*.js\" --port 3000",
+    "start": "browser-sync start --server --files \"*.html, *.css, *.js, **/*.html, **/*.css, **/*.js\" --port 3004",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
