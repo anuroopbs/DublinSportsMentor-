@@ -7,101 +7,116 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Set default date to today
   const today = new Date().toISOString().split('T')[0];
-  document.getElementById('player-availability-date').value = today;
+  const availabilityDateInput = document.getElementById('player-availability-date');
+  if (availabilityDateInput) {
+    availabilityDateInput.value = today;
+  }
   
   // Handle player registration form submission
-  playerForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('player-name').value;
-    const gender = document.getElementById('player-gender').value;
-    const division = document.getElementById('player-division').value;
-    const email = document.getElementById('player-email').value;
-    const phone = document.getElementById('player-phone').value;
-    const sport = document.getElementById('player-sport').value;
-    const availabilityDate = document.getElementById('player-availability-date').value;
-    const availabilityTime = document.getElementById('player-availability-time').value;
-    const notes = document.getElementById('player-notes').value;
-    
-    // Create player object
-    const player = {
-      name,
-      gender,
-      division,
-      email,
-      phone,
-      sport,
-      availabilityDate,
-      availabilityTime,
-      notes,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    };
-    
-    // Add player to Firebase
-    firebase.firestore().collection('players').add(player)
-      .then(function() {
-        console.log('Player added successfully');
-        
-        // Reset form
-        playerForm.reset();
-        
-        // Reset date to today
-        document.getElementById('player-availability-date').value = today;
-        
-        // Show success modal
-        document.getElementById('registrationSuccessModal').style.display = 'flex';
-        
-        // Refresh player list
-        loadPlayers();
-      })
-      .catch(function(error) {
-        console.error('Error adding player: ', error);
-        alert('Error registering player. Please try again.');
-      });
-  });
+  if (playerForm) {
+    playerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Get form values
+      const name = document.getElementById('player-name').value;
+      const gender = document.getElementById('player-gender').value;
+      const division = document.getElementById('player-division').value;
+      const email = document.getElementById('player-email').value;
+      const phone = document.getElementById('player-phone').value;
+      const sport = document.getElementById('player-sport').value;
+      const availabilityDate = document.getElementById('player-availability-date').value;
+      const availabilityTime = document.getElementById('player-availability-time').value;
+      const notes = document.getElementById('player-notes').value;
+      
+      // Create player object
+      const player = {
+        name,
+        gender,
+        division,
+        email,
+        phone,
+        sport,
+        availabilityDate,
+        availabilityTime,
+        notes,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+      
+      // Add player to Firebase
+      firebase.firestore().collection('players').add(player)
+        .then(function() {
+          console.log('Player added successfully');
+          
+          // Reset form
+          playerForm.reset();
+          
+          // Reset date to today
+          document.getElementById('player-availability-date').value = today;
+          
+          // Show success modal
+          const successModal = document.getElementById('registrationSuccessModal');
+          if (successModal) {
+            successModal.style.display = 'flex';
+          }
+          
+          // Refresh player list
+          loadPlayers();
+        })
+        .catch(function(error) {
+          console.error('Error adding player: ', error);
+          alert('Error registering player. Please try again.');
+        });
+    });
+  }
   
   // Load players from Firebase
   function loadPlayers() {
+    if (!playersContainer) return;
+    
     playersContainer.innerHTML = '<div class="loading-message">Loading players...</div>';
     
     // Get filter values
-    const divisionFilter = filterDivision.value;
-    const genderFilter = filterGender.value;
+    const divisionFilter = filterDivision ? filterDivision.value : 'All';
+    const genderFilter = filterGender ? filterGender.value : 'All';
     
-    // Create query
-    let query = firebase.firestore().collection('players').orderBy('createdAt', 'desc');
-    
-    // Apply filters if not "All"
-    if (divisionFilter !== 'All') {
-      query = query.where('division', '==', divisionFilter);
-    }
-    
-    if (genderFilter !== 'All') {
-      query = query.where('gender', '==', genderFilter);
-    }
-    
-    // Execute query
-    query.get()
-      .then(function(querySnapshot) {
-        if (querySnapshot.empty) {
-          playersContainer.innerHTML = '<p>No players found matching your criteria.</p>';
-          return;
-        }
-        
-        playersContainer.innerHTML = '';
-        
-        // Loop through players and create cards
-        querySnapshot.forEach(function(doc) {
-          const playerData = doc.data();
-          const playerCard = createPlayerCard(playerData);
-          playersContainer.appendChild(playerCard);
+    try {
+      // Create query
+      let query = firebase.firestore().collection('players').orderBy('createdAt', 'desc');
+      
+      // Apply filters if not "All"
+      if (divisionFilter !== 'All') {
+        query = query.where('division', '==', divisionFilter);
+      }
+      
+      if (genderFilter !== 'All') {
+        query = query.where('gender', '==', genderFilter);
+      }
+      
+      // Execute query
+      query.get()
+        .then(function(querySnapshot) {
+          if (querySnapshot.empty) {
+            playersContainer.innerHTML = '<p>No players found matching your criteria.</p>';
+            return;
+          }
+          
+          playersContainer.innerHTML = '';
+          
+          // Loop through players and create cards
+          querySnapshot.forEach(function(doc) {
+            const playerData = doc.data();
+            const playerCard = createPlayerCard(playerData);
+            playersContainer.appendChild(playerCard);
+          });
+        })
+        .catch(function(error) {
+          console.error('Error loading players: ', error);
+          playersContainer.innerHTML = '<p>Error loading players. Please try again later.</p>';
         });
-      })
-      .catch(function(error) {
-        console.error('Error loading players: ', error);
-        playersContainer.innerHTML = '<p>Error loading players. Please try again later.</p>';
-      });
+    } catch (error) {
+      console.error('Error setting up query: ', error);
+      playersContainer.innerHTML = '<p>Error loading players. Please try again later.</p>';
+    }
   }
   
   // Create a player card element
@@ -124,21 +139,26 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Create card content
     let cardContent = `
-      <div class="player-name">${player.name}</div>
-      <div class="player-division">${player.division} ${divisionDesc}</div>
-      <div class="player-gender">Gender: ${player.gender}</div>
+      <div class="player-name">${player.name || 'Anonymous'}</div>
+      <div class="player-division">${player.division || 'Unknown'} ${divisionDesc}</div>
+      <div class="player-gender">Gender: ${player.gender || 'Not specified'}</div>
       <div class="player-sport">Sport: ${player.sport || 'Not specified'}</div>
     `;
     
     // Add availability if provided
     if (player.availabilityDate && player.availabilityTime) {
-      const formattedDate = new Date(player.availabilityDate).toLocaleDateString('en-US', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-      cardContent += `<div class="player-availability">Available: ${formattedDate} at ${player.availabilityTime}</div>`;
+      try {
+        const formattedDate = new Date(player.availabilityDate).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        cardContent += `<div class="player-availability">Available: ${formattedDate} at ${player.availabilityTime}</div>`;
+      } catch (error) {
+        console.error('Error formatting date: ', error);
+        cardContent += `<div class="player-availability">Available: ${player.availabilityDate} at ${player.availabilityTime}</div>`;
+      }
     }
     
     // Add contact info
@@ -161,8 +181,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // Add event listeners for filters
-  filterDivision.addEventListener('change', loadPlayers);
-  filterGender.addEventListener('change', loadPlayers);
+  if (filterDivision) {
+    filterDivision.addEventListener('change', loadPlayers);
+  }
+  
+  if (filterGender) {
+    filterGender.addEventListener('change', loadPlayers);
+  }
   
   // Initial load of players
   loadPlayers();

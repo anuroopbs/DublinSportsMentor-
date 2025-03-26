@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dublin Sports Mentor</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#004080" />
+  <link rel="apple-touch-icon" href="icons/icon-192x192.png" />
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
@@ -14,12 +18,18 @@
   <script src="email-config.js" defer></script>
   <script src="booking.js" defer></script>
   <script src="script.js" defer></script>
+  <script src="pwa.js" defer></script>
 </head>
 <body>
   <!-- Full working HTML from canvas -->
   <!-- The complete code from canvas has been applied here -->
   <header>
     <h1 style="color: #004080;">Dublin Sports Mentor</h1>
+    <div class="hamburger-menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <nav>
       <ul>
         <li><a href="quiz.html">Find Your Sport</a></li>
@@ -29,6 +39,14 @@
         <li><a href="https://buy.stripe.com/14k3cZ7Yz3jCcdGbIJ" target="_blank">Funds</a></li>
         <li><a href="#" onclick="document.getElementById('socialModal').style.display='flex'">Social Media</a></li>
         <li><a href="#" onclick="document.getElementById('projectDetailsModal').style.display='flex'">Project Details</a></li>
+        <li><a href="login.html" id="login-nav-link">Login</a></li>
+        <li class="user-dropdown" style="display: none;">
+          <a href="#" id="user-dropdown-toggle"><span id="user-name">User</span> ▼</a>
+          <div class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="#" id="logout-link">Logout</a>
+          </div>
+        </li>
       </ul>
     </nav>
   </header>
@@ -125,8 +143,8 @@
     </div>
   </div>
 
-  <div id="socialModal" style="display:none; position: absolute; top: 90px; right: 40px; background-color: #ffffff; border: 1px solid #ccc; padding: 15px 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000;">
-    <div style="text-align: center;">
+  <div id="socialModal" class="modal">
+    <div class="modal-content">
       <h2>Connect with the Squash Fraternity</h2>
       <ul style="list-style: none; padding-left: 0; line-height: 2;">
         <li><a href="https://www.facebook.com/groups/138252883393098/?ref=share" target="_blank">Dublin Squash Group</a></li>
@@ -137,8 +155,8 @@
     </div>
   </div>
   
-  <div id="projectDetailsModal" style="display:none; position: absolute; top: 90px; right: 40px; background-color: #ffffff; border: 1px solid #ccc; padding: 15px 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000;">
-    <div style="text-align: center;">
+  <div id="projectDetailsModal" class="modal">
+    <div class="modal-content">
       <h2>About Dublin Sports Mentor</h2>
       <p style="text-align: left; line-height: 1.6; margin: 15px 0;">
         Dublin Sports Mentor is an initiative to connect sports enthusiasts in Dublin with coaching services, player matching, and sports consultation. We aims to introduce 1% of Dublin's population to sports through personalized guidance and community building.

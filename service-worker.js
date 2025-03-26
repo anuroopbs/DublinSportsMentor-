@@ -1,14 +1,22 @@
-// Service worker for Dublin Sports Hub PWA
-const CACHE_NAME = 'squash-hub-v1';
+// Service Worker for Dublin Sports Mentor PWA
+const CACHE_NAME = 'dublin-sports-mentor-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/ladder.html',
+  '/find-player.html',
+  '/login.html',
   '/styles.css',
-  '/ladder-styles.css',
+  '/mobile.css',
+  '/find-player.css',
+  '/auth.css',
   '/script.js',
-  '/ladder.js',
-  '/manifest.json',
+  '/find-player.js',
+  '/auth.js',
+  '/pwa.js',
+  '/firebase-config.js',
+  '/auth-check.js',
+  '/email-config.js',
+  '/booking.js',
   '/icons/icon-72x72.png',
   '/icons/icon-96x96.png',
   '/icons/icon-128x128.png',
@@ -16,10 +24,8 @@ const urlsToCache = [
   '/icons/icon-152x152.png',
   '/icons/icon-192x192.png',
   '/icons/icon-384x384.png',
-  '/icons/icon-512x512.png'
-  '/icons/splash.png',
-  'https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js',
-  'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js'
+  '/icons/icon-512x512.png',
+  '/icons/splash.png'
 ];
 
 // Install event - cache assets
@@ -29,6 +35,9 @@ self.addEventListener('install', event => {
       .then(cache => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
+      })
+      .catch(error => {
+        console.error('Error during service worker install:', error);
       })
   );
 });
@@ -51,6 +60,13 @@ self.addEventListener('activate', event => {
 
 // Fetch event - serve from cache, fall back to network
 self.addEventListener('fetch', event => {
+  // Skip cross-origin requests like Google and Facebook auth
+  if (!event.request.url.startsWith(self.location.origin) || 
+      event.request.url.includes('firestore') ||
+      event.request.url.includes('firebase')) {
+    return;
+  }
+  
   event.respondWith(
     caches.match(event.request)
       .then(response => {
@@ -59,41 +75,45 @@ self.addEventListener('fetch', event => {
           return response;
         }
         
-        // Clone the request
+        // Clone the request because it's a one-time use stream
         const fetchRequest = event.request.clone();
         
-        return fetch(fetchRequest).then(
-          response => {
-            // Check if valid response
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-            
-            // Clone the response
-            const responseToCache = response.clone();
-            
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-              
+        return fetch(fetchRequest).then(response => {
+          // Check if we received a valid response
+          if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
-        );
+          
+          // Clone the response because it's a one-time use stream
+          const responseToCache = response.clone();
+          
+          caches.open(CACHE_NAME)
+            .then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+            
+          return response;
+        });
+      })
+      .catch(error => {
+        console.error('Fetch error:', error);
+        // You can return a custom offline page here
       })
   );
 });
 
 // Handle push notifications
 self.addEventListener('push', event => {
-  const title = 'Dublin Sports Hub';
+  const title = 'Dublin Sports Mentor';
   const options = {
     body: event.data.text(),
     icon: '/icons/icon-192x192.png',
     badge: '/icons/icon-72x72.png'
   };
   
-  event.waitUntil(self.registration.showNotification(title, options));
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+  );
 });
 
 // Handle notification clicks
@@ -101,6 +121,6 @@ self.addEventListener('notificationclick', event => {
   event.notification.close();
   
   event.waitUntil(
-    clients.openWindow('https://3000-idnfwnyzyyry76iax9vf1-af56deff.manus.computer/')
+    clients.openWindow('/')
   );
 });
