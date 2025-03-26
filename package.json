@@ -1,0 +1,22 @@
+{
+  "name": "dublin-sports-mentor",
+  "version": "1.0.0",
+  "description": "Dublin Sports Mentor visualization sandbox for live editing",
+  "main": "index.html",
+  "scripts": {
+    "start": "browser-sync start --server --files \"*.html, *.css, *.js, **/*.html, **/*.css, **/*.js\" --port 3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dublin",
+    "sports",
+    "mentor",
+    "visualization",
+    "sandbox"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.29.3"
+  }
+}

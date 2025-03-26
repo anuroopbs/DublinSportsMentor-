@@ -22,6 +22,7 @@
         <li><a href="#">Find a Player</a></li>
         <li><a href="#">Funds</a></li>
         <li><a href="#" onclick="document.getElementById('socialModal').style.display='flex'">Social Media</a></li>
+        <li><a href="#" onclick="document.getElementById('projectDetailsModal').style.display='flex'">Project Details</a></li>
       </ul>
     </nav>
   </header>
@@ -45,11 +46,7 @@
           <span id="counter-remaining" style="font-size: 28px; color: #0057b8; font-weight: bold;">0</span>
         </div>
       </div>
-      <p>Our goal at Dublin Sports Mentor is simple: to introduce Dubliners and expats to integrate sports into their lives.
-We’re delighted to work with all sections of the community, making sports accessible, inclusive, and an essential part of everyday life.
-
-We bring together top-tier coaches, experts, and teachers who are not only highly skilled but also passionate about spending quality time with you — helping you grow, thrive, and ultimately unleash your inner champion.
-Because it’s never too late to pick up a sport..</p>
+      <p>We bring together top-tier coaches... unleash your inner champion.</p>
     </div>
 
     <div class="column">
@@ -119,6 +116,16 @@ Because it’s never too late to pick up a sport..</p>
         <li><a href="https://www.facebook.com/groups/625415176502463/?ref=share" target="_blank">Global Squash Coaches Group</a></li>
       </ul>
       <button onclick="document.getElementById('socialModal').style.display='none'" class="btn-primary">Close</button>
+    </div>
+  </div>
+  
+  <div id="projectDetailsModal" style="display:none; position: absolute; top: 90px; right: 40px; background-color: #ffffff; border: 1px solid #ccc; padding: 15px 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000;">
+    <div style="text-align: center;">
+      <h2>About Dublin Sports Mentor</h2>
+      <p style="text-align: left; line-height: 1.6; margin: 15px 0;">
+        Dublin Sports Mentor is an initiative to connect sports enthusiasts in Dublin with coaching services, player matching, and sports consultation. We aims to introduce 1% of Dublin's population to sports through personalized guidance and community building.
+      </p>
+      <button onclick="document.getElementById('projectDetailsModal').style.display='none'" class="btn-primary">Close</button>
     </div>
   </div>
 
