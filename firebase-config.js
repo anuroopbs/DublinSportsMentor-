@@ -9,6 +9,11 @@ const firebaseConfig = {
   measurementId: "G-BXGT20LRNR"
 };
 
+// Add authorized domain for Replit
+if (window.location.hostname.includes('replit.dev')) {
+  firebaseConfig.authDomain = window.location.hostname;
+}
+
 // Initialize Firebase
 if (typeof firebase !== 'undefined') {
   // Check if Firebase is already initialized
