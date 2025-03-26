@@ -1,3 +1,4 @@
+
 // Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB4rQpYsVay_5diUtizBUJPobl52VJ7yn4",
@@ -9,19 +10,31 @@ const firebaseConfig = {
   measurementId: "G-BXGT20LRNR"
 };
 
-// Add authorized domain for Replit
-if (window.location.hostname.includes('replit.dev')) {
-  firebaseConfig.authDomain = window.location.hostname;
-}
+// Initialize Firebase with proper domain handling
+const initFirebase = () => {
+  if (typeof firebase !== 'undefined') {
+    try {
+      // Set auth domain based on environment
+      if (window.location.hostname.includes('replit')) {
+        firebase.auth().settings.appVerificationDisabledForTesting = true;
+        firebaseConfig.authDomain = window.location.hostname;
+      }
+      
+      // Initialize app if not already initialized
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+      
+      return firebase;
+    } catch (error) {
+      console.error('Firebase initialization error:', error);
+      throw error;
+    }
+  } else {
+    console.error('Firebase SDK not loaded');
+    throw new Error('Firebase SDK not loaded');
+  }
+};
 
 // Initialize Firebase
-if (typeof firebase !== 'undefined') {
-  // Check if Firebase is already initialized
-  try {
-    firebase.app();
-  } catch (e) {
-    firebase.initializeApp(firebaseConfig);
-  }
-} else {
-  console.error('Firebase SDK not loaded. Please check your internet connection and try again.');
-}
+initFirebase();
