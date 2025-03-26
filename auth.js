@@ -155,30 +155,18 @@ document.addEventListener('DOMContentLoaded', function() {
       prompt: 'select_account'
     });
     
-    firebase.auth().signInWithRedirect(provider)
-      .then(() => {
-        // Handle is not needed here as redirect will happen automatically
-      })
-      .catch((error) => {
-        console.error('Google login error:', error);
-        alert('Login failed. Please try again.');
-      });
-  };
-  
-  // Handle redirect result
-  firebase.auth()
-    .getRedirectResult()
-    .then((result) => {
-      if (result.user) {
+    firebase.auth().signInWithPopup(provider)
+      .then((result) => {
         showAuthSuccess('Google Login Successful', 'You have been logged in successfully. Redirecting...');
         setTimeout(() => {
           window.location.href = 'index.html';
         }, 2000);
-      }
-    })
-    .catch((error) => {
-      console.error('Redirect result error:', error);
-    });
+      })
+      .catch((error) => {
+        console.error('Google login error:', error);
+        alert(`Login failed: ${error.message}`);
+      });
+  };
   
   if (googleLoginBtn) {
     googleLoginBtn.addEventListener('click', handleGoogleLogin);
