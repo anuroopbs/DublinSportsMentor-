@@ -41,4 +41,4 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run start"
+args = "node server.js"
