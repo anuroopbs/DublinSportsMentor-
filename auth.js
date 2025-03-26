@@ -154,23 +154,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const googleLoginBtn = document.getElementById('google-login-btn');
   const googleRegisterBtn = document.getElementById('google-register-btn');
   
-  const handleGoogleLogin = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    provider.setCustomParameters({
-      prompt: 'select_account'
-    });
-    
-    firebase.auth().signInWithPopup(provider)
-      .then((result) => {
-        showAuthSuccess('Google Login Successful', 'You have been logged in successfully. Redirecting...');
+  const handleGoogleLogin = async () => {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const result = await firebase.auth().signInWithRedirect(provider);
+      
+      if (result) {
+        showAuthSuccess('Google Login Successful', 'You have been logged in successfully.');
         setTimeout(() => {
           window.location.href = 'index.html';
         }, 2000);
-      })
-      .catch((error) => {
-        console.error('Google login error:', error);
-        alert(`Login failed: ${error.message}`);
-      });
+      }
+    } catch (error) {
+      console.error('Google login error:', error);
+      alert(`Login failed: ${error.message}`);
+    }
   };
   
   if (googleLoginBtn) {
