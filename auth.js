@@ -26,9 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
   if (forgotPasswordLink) {
     forgotPasswordLink.addEventListener('click', function(e) {
       e.preventDefault();
-      forms.forEach(form => form.classList.remove('active'));
-      document.getElementById('forgot-password-form').classList.add('active');
-      tabs.forEach(t => t.classList.remove('active'));
+      const loginForm = document.getElementById('login-form');
+      const forgotForm = document.getElementById('forgot-password-form');
+      if (loginForm && forgotForm) {
+        loginForm.classList.remove('active');
+        forgotForm.classList.add('active');
+        // Remove active state from tabs
+        document.querySelectorAll('.auth-tab').forEach(tab => tab.classList.remove('active'));
+      }
     });
   }
   
