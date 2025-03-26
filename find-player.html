@@ -1,41 +1,138 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Find a Player</title>
+  <title>Find a Player - Dublin Sports Mentor</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="find-player.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="find-player.js" defer></script>
 </head>
 <body>
   <header>
-    <div class="logo"><a href="index.html">Dublin Sports Mentor</a></div>
+    <h1 style="color: #004080;">Dublin Sports Mentor</h1>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
+        <li><a href="quiz.html">Find Your Sport</a></li>
+        <li><a href="#">Coaching</a></li>
+        <li><a href="#">Ladder Rankings</a></li>
         <li><a href="find-player.html" class="active">Find a Player</a></li>
+        <li><a href="https://buy.stripe.com/14k3cZ7Yz3jCcdGbIJ" target="_blank">Funds</a></li>
+        <li><a href="#" onclick="document.getElementById('socialModal').style.display='flex'">Social Media</a></li>
       </ul>
     </nav>
   </header>
 
-  <div class="container">
-    <div class="card">
-      <h2>Find a Player</h2>
-      <form>
+  <div class="hero">
+    <h2>Find a Player</h2>
+    <p>Connect with other players in Dublin based on skill level, gender, and availability.</p>
+  </div>
+
+  <div class="container find-player-container">
+    <div class="column registration-form">
+      <h2>Register as a Player</h2>
+      <form id="player-registration-form">
         <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" id="name" />
+          <label for="player-name">Full Name:</label>
+          <input type="text" id="player-name" required />
         </div>
+        
         <div class="form-group">
-          <label for="level">Level:</label>
-          <input type="text" id="level" />
+          <label for="player-gender">Gender:</label>
+          <select id="player-gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
         </div>
+        
         <div class="form-group">
-          <label for="time">Preferred Time:</label>
-          <input type="text" id="time" />
+          <label for="player-division">Division:</label>
+          <select id="player-division" required>
+            <option value="">Select Division</option>
+            <option value="Premier">Premier - Top players, advanced tactics (2+ years)</option>
+            <option value="Division 1">Division 1 - Very skilled, excellent shot variety (1.5-2 years)</option>
+            <option value="Division 2">Division 2 - Advanced, tactical shots (1-1.5 years)</option>
+            <option value="Division 3">Division 3 - Intermediate, tactical awareness (6 months-1 year)</option>
+            <option value="Division 4">Division 4 - Novice to intermediate (3-6 months)</option>
+            <option value="Division 5">Division 5 - Beginner with some experience (1-3 months)</option>
+            <option value="Division 6">Division 6 - Entry-level, learning basics (<1 month)</option>
+          </select>
         </div>
-        <button type="submit" class="btn-primary">Submit</button>
+        
+        <div class="form-group">
+          <label for="player-email">Email (optional):</label>
+          <input type="email" id="player-email" placeholder="For contact purposes only" />
+        </div>
+        
+        <div class="form-group">
+          <label for="player-phone">Phone (optional):</label>
+          <input type="tel" id="player-phone" placeholder="For contact purposes only" />
+        </div>
+        
+        <div class="form-group">
+          <label for="player-availability">Availability (optional):</label>
+          <textarea id="player-availability" placeholder="E.g., Weekday evenings, Weekend mornings, etc."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="player-notes">Additional Notes (optional):</label>
+          <textarea id="player-notes" placeholder="Any other information you'd like to share"></textarea>
+        </div>
+        
+        <button type="submit" id="register-player-btn" class="btn-primary">Register as Player</button>
       </form>
+    </div>
+    
+    <div class="column player-directory">
+      <h2>Player Directory</h2>
+      
+      <div class="filter-controls">
+        <div class="form-group">
+          <label for="filter-division">Filter by Division:</label>
+          <select id="filter-division">
+            <option value="All">All Divisions</option>
+            <option value="Premier">Premier</option>
+            <option value="Division 1">Division 1</option>
+            <option value="Division 2">Division 2</option>
+            <option value="Division 3">Division 3</option>
+            <option value="Division 4">Division 4</option>
+            <option value="Division 5">Division 5</option>
+            <option value="Division 6">Division 6</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="filter-gender">Filter by Gender:</label>
+          <select id="filter-gender">
+            <option value="All">All</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+      
+      <div id="players-container" class="players-grid">
+        <!-- Player cards will be dynamically inserted here -->
+        <div class="loading-message">Loading players...</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="registrationSuccessModal" class="modal">
+    <div class="modal-content">
+      <h2>Registration Successful!</h2>
+      <p>Your player profile has been added to our directory.</p>
+      <p>Other players can now find you based on your division and availability.</p>
+      <button onclick="document.getElementById('registrationSuccessModal').style.display='none'" class="btn-primary">Close</button>
     </div>
   </div>
 
