@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dublin Sports Mentor</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="email-config.js" defer></script>
+  <script src="booking.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 <body>
   <!-- Full working HTML from canvas -->
@@ -20,7 +22,7 @@
         <li><a href="#">Coaching</a></li>
         <li><a href="#">Ladder Rankings</a></li>
         <li><a href="#">Find a Player</a></li>
-        <li><a href="#">Funds</a></li>
+        <li><a href="https://buy.stripe.com/test_00g5lO0Vk4Hl0QU000" target="_blank">Funds</a></li>
         <li><a href="#" onclick="document.getElementById('socialModal').style.display='flex'">Social Media</a></li>
         <li><a href="#" onclick="document.getElementById('projectDetailsModal').style.display='flex'">Project Details</a></li>
       </ul>
@@ -104,7 +106,18 @@
         <label for="notes">Special Requests or Notes:</label>
         <textarea id="notes"></textarea>
       </div>
-      <button class="btn-primary">Request Booking</button>
+      <button id="submit-btn" class="btn-primary">Request Booking</button>
+    </div>
+  </div>
+  
+  <div id="confirmationModal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 2000;">
+    <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 500px; text-align: center;">
+      <h2 style="color: #004080; margin-top: 0;">Booking Confirmed!</h2>
+      <p style="font-size: 16px; line-height: 1.6; margin: 20px 0;">
+        Thank you for booking a session with Dublin Sports Mentor. We have received your request and will contact you shortly to confirm the details.
+      </p>
+      <p style="font-size: 14px; color: #666;">A confirmation email has been sent to your email address.</p>
+      <button onclick="document.getElementById('confirmationModal').style.display='none'" class="btn-primary" style="width: auto; padding: 10px 30px; margin-top: 20px;">Close</button>
     </div>
   </div>
 

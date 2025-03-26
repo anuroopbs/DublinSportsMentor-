@@ -45,14 +45,35 @@ nav ul li a {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
-label, input, select, textarea {
+label {
   display: block;
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+  margin-bottom: 8px;
   font-size: 14px;
+  font-weight: 600;
+  color: #004080;
+}
+input, select, textarea {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cce5ff;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  height: 45px;
+}
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #004080;
+  box-shadow: 0 0 0 2px rgba(0, 64, 128, 0.2);
 }
 .btn-primary {
   background-color: #004080;
