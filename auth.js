@@ -157,9 +157,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const handleGoogleLogin = async () => {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
-      const result = await firebase.auth().signInWithRedirect(provider);
+      provider.addScope('email');
+      provider.addScope('profile');
       
-      if (result) {
+      const result = await firebase.auth().signInWithPopup(provider);
+      
+      if (result.user) {
         showAuthSuccess('Google Login Successful', 'You have been logged in successfully.');
         setTimeout(() => {
           window.location.href = 'index.html';
@@ -167,7 +170,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     } catch (error) {
       console.error('Google login error:', error);
-      alert(`Login failed: ${error.message}`);
+      if (error.code === 'auth/popup-blocked') {
+        alert('Please enable popups for this site to use Google login');
+      } else {
+        alert(`Login failed: ${error.message}`);
+      }
     }
   };
   
