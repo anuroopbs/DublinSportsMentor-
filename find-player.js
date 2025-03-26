@@ -1,12 +1,13 @@
-// Initialize Firebase from the firebase-config.js file
-// The db variable should be available from firebase-config.js
-
 document.addEventListener('DOMContentLoaded', function() {
   // Reference to the player registration form
   const playerForm = document.getElementById('player-registration-form');
   const playersContainer = document.getElementById('players-container');
   const filterDivision = document.getElementById('filter-division');
   const filterGender = document.getElementById('filter-gender');
+  
+  // Set default date to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('player-availability-date').value = today;
   
   // Handle player registration form submission
   playerForm.addEventListener('submit', function(e) {
@@ -18,7 +19,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const division = document.getElementById('player-division').value;
     const email = document.getElementById('player-email').value;
     const phone = document.getElementById('player-phone').value;
-    const availability = document.getElementById('player-availability').value;
+    const sport = document.getElementById('player-sport').value;
+    const availabilityDate = document.getElementById('player-availability-date').value;
+    const availabilityTime = document.getElementById('player-availability-time').value;
     const notes = document.getElementById('player-notes').value;
     
     // Create player object
@@ -28,7 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
       division,
       email,
       phone,
-      availability,
+      sport,
+      availabilityDate,
+      availabilityTime,
       notes,
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };
@@ -40,6 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Reset form
         playerForm.reset();
+        
+        // Reset date to today
+        document.getElementById('player-availability-date').value = today;
         
         // Show success modal
         document.getElementById('registrationSuccessModal').style.display = 'flex';
@@ -101,28 +109,51 @@ document.addEventListener('DOMContentLoaded', function() {
     const card = document.createElement('div');
     card.className = 'player-card';
     
+    // Get division description
+    let divisionDesc = '';
+    switch(player.division) {
+      case 'Premier': divisionDesc = '(2+ yrs, top level)'; break;
+      case 'Division 1': divisionDesc = '(1.5–2 yrs, club elite)'; break;
+      case 'Division 2': divisionDesc = '(1–1.5 yrs, advanced)'; break;
+      case 'Division 3': divisionDesc = '(6mo–1 yr, intermediate)'; break;
+      case 'Division 4': divisionDesc = '(3–6 mo, building basics)'; break;
+      case 'Division 5': divisionDesc = '(1–3 mo, beginner)'; break;
+      case 'Division 6': divisionDesc = '(<1 mo, just starting)'; break;
+      default: divisionDesc = '';
+    }
+    
     // Create card content
     let cardContent = `
       <div class="player-name">${player.name}</div>
-      <div class="player-division">${player.division}</div>
+      <div class="player-division">${player.division} ${divisionDesc}</div>
       <div class="player-gender">Gender: ${player.gender}</div>
+      <div class="player-sport">Sport: ${player.sport || 'Not specified'}</div>
     `;
     
     // Add availability if provided
-    if (player.availability) {
-      cardContent += `<div class="player-availability">Availability: ${player.availability}</div>`;
+    if (player.availabilityDate && player.availabilityTime) {
+      const formattedDate = new Date(player.availabilityDate).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      cardContent += `<div class="player-availability">Available: ${formattedDate} at ${player.availabilityTime}</div>`;
     }
     
-    // Add contact info if provided
-    if (player.email || player.phone) {
-      cardContent += '<div class="player-contact">';
-      if (player.email) {
-        cardContent += `Email: ${player.email}<br>`;
-      }
-      if (player.phone) {
-        cardContent += `Phone: ${player.phone}`;
-      }
-      cardContent += '</div>';
+    // Add contact info
+    cardContent += '<div class="player-contact">';
+    if (player.email) {
+      cardContent += `Email: ${player.email}<br>`;
+    }
+    if (player.phone) {
+      cardContent += `Mobile/WhatsApp: ${player.phone}`;
+    }
+    cardContent += '</div>';
+    
+    // Add notes if provided
+    if (player.notes) {
+      cardContent += `<div class="player-notes">Notes: ${player.notes}</div>`;
     }
     
     card.innerHTML = cardContent;

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Dublin Sports Mentor</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="auth.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="auth.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1 style="color: #004080;">Dublin Sports Mentor</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="quiz.html">Find Your Sport</a></li>
+        <li><a href="#">Coaching</a></li>
+        <li><a href="#">Ladder Rankings</a></li>
+        <li><a href="find-player.html">Find a Player</a></li>
+        <li><a href="https://buy.stripe.com/14k3cZ7Yz3jCcdGbIJ" target="_blank">Funds</a></li>
+        <li><a href="#" onclick="document.getElementById('socialModal').style.display='flex'">Social Media</a></li>
+        <li><a href="login.html" class="active">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Member Login</h2>
+    <p>Login to access exclusive features like player matching and session booking.</p>
+  </div>
+
+  <div class="container auth-container">
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Login</button>
+        <button class="auth-tab" data-tab="register">Register</button>
+      </div>
+      
+      <div id="login-form" class="auth-form active">
+        <h2>Login to Your Account</h2>
+        <div class="form-group">
+          <label for="login-email">Email:</label>
+          <input type="email" id="login-email" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="login-password">Password:</label>
+          <input type="password" id="login-password" required />
+        </div>
+        
+        <div class="form-group">
+          <button id="login-btn" class="btn-primary">Login</button>
+        </div>
+        
+        <div class="auth-links">
+          <a href="#" id="forgot-password-link">Forgot Password?</a>
+        </div>
+      </div>
+      
+      <div id="register-form" class="auth-form">
+        <h2>Create New Account</h2>
+        <div class="form-group">
+          <label for="register-name">Full Name:</label>
+          <input type="text" id="register-name" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="register-email">Email:</label>
+          <input type="email" id="register-email" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="register-password">Password:</label>
+          <input type="password" id="register-password" required />
+          <small>Password must be at least 6 characters</small>
+        </div>
+        
+        <div class="form-group">
+          <label for="register-confirm-password">Confirm Password:</label>
+          <input type="password" id="register-confirm-password" required />
+        </div>
+        
+        <div class="form-group">
+          <button id="register-btn" class="btn-primary">Register</button>
+        </div>
+      </div>
+      
+      <div id="forgot-password-form" class="auth-form">
+        <h2>Reset Password</h2>
+        <p>Enter your email address and we'll send you a link to reset your password.</p>
+        
+        <div class="form-group">
+          <label for="reset-email">Email:</label>
+          <input type="email" id="reset-email" required />
+        </div>
+        
+        <div class="form-group">
+          <button id="reset-btn" class="btn-primary">Send Reset Link</button>
+        </div>
+        
+        <div class="auth-links">
+          <a href="#" id="back-to-login-link">Back to Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="authSuccessModal" class="modal">
+    <div class="modal-content">
+      <h2 id="auth-success-title">Success!</h2>
+      <p id="auth-success-message"></p>
+      <button onclick="document.getElementById('authSuccessModal').style.display='none'" class="btn-primary">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Dublin Sports Mentor</p>
+  </footer>
+</body>
+</html>

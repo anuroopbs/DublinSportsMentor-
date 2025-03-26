@@ -1,11 +1,4 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyB4rQpYsVay_5diUtizBUJPobl52VJ7yn4",
   authDomain: "dublin-sports-hub.firebaseapp.com",
@@ -17,8 +10,4 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig) ;
-const db = getFirestore(app);
-
-// Export the database for use in other files
-export default db;
+firebase.initializeApp(firebaseConfig);

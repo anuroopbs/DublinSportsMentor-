@@ -6,7 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dublin Sports Mentor</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="auth-check.js" defer></script>
   <script src="email-config.js" defer></script>
   <script src="booking.js" defer></script>
   <script src="script.js" defer></script>
@@ -21,7 +25,7 @@
         <li><a href="quiz.html">Find Your Sport</a></li>
         <li><a href="#">Coaching</a></li>
         <li><a href="#">Ladder Rankings</a></li>
-        <li><a href="#">Find a Player</a></li>
+        <li><a href="find-player.html">Find a Player</a></li>
         <li><a href="https://buy.stripe.com/14k3cZ7Yz3jCcdGbIJ" target="_blank">Funds</a></li>
         <li><a href="#" onclick="document.getElementById('socialModal').style.display='flex'">Social Media</a></li>
         <li><a href="#" onclick="document.getElementById('projectDetailsModal').style.display='flex'">Project Details</a></li>
