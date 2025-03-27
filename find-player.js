@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Check if user email is verified
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user && !user.emailVerified) {
+      alert('Please verify your email before registering as a player');
+      window.location.href = 'index.html';
+      return;
+    }
+  });
+
   // Reference to the player registration form
   const playerForm = document.getElementById('player-registration-form');
   const playersContainer = document.getElementById('players-container');

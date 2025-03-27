@@ -102,18 +102,20 @@ document.addEventListener('DOMContentLoaded', function() {
       
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // Update profile with name
-          return userCredential.user.updateProfile({
-            displayName: name
+          // Send email verification
+          return userCredential.user.sendEmailVerification().then(() => {
+            return userCredential.user.updateProfile({
+              displayName: name
+            });
           });
         })
         .then(() => {
           // Show success message
-          showAuthSuccess('Registration Successful', 'Your account has been created successfully. Redirecting...');
+          showAuthSuccess('Registration Successful', 'Please check your email to verify your account. Redirecting to player registration...');
           
-          // Redirect to home page after a short delay
+          // Redirect to player registration after a short delay
           setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = 'find-player.html?newUser=true';
           }, 2000);
         })
         .catch((error) => {
