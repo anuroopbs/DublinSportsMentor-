@@ -6,7 +6,7 @@ body {
   color: #003366;
 }
 header {
-  background-color: #99cfff;
+  background-color: #FFE0CC;
   padding: 20px;
   text-align: center;
 }
@@ -19,7 +19,7 @@ nav ul {
   gap: 20px;
 }
 nav ul li a {
-  color: #004080;
+  color: #FF8533;
   text-decoration: none;
   font-weight: bold;
 }
