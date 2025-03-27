@@ -1,5 +1,14 @@
 /* Mobile Optimization Styles */
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
   /* General adjustments */
   body {
     font-size: 16px;
