@@ -119,7 +119,21 @@ document.addEventListener('DOMContentLoaded', function() {
           }, 2000);
         })
         .catch((error) => {
-          alert(`Registration failed: ${error.message}`);
+          let errorMessage = 'Registration failed: ';
+          switch (error.code) {
+            case 'auth/email-already-in-use':
+              errorMessage += 'This email is already registered. Please login instead.';
+              break;
+            case 'auth/invalid-email':
+              errorMessage += 'Please enter a valid email address.';
+              break;
+            case 'auth/weak-password':
+              errorMessage += 'Password should be at least 6 characters long.';
+              break;
+            default:
+              errorMessage += error.message;
+          }
+          alert(errorMessage);
         });
     });
   }
